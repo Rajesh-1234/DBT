@@ -1,0 +1,122 @@
+Assignment No. 1
+1)mysql> create table SALESPEOPLE
+    -> (Snum int(4),
+    -> Sname varchar(10),
+    -> City  varchar(10),
+    -> Comm  float(3,2));
+
+2)mysql> create table CUSTOMERS
+    -> (Cnum int(4),
+    -> Cname varchar(10),
+    -> City  varchar(10),
+    -> Rating  int(4),
+    -> Snum int(4));
+
+3)mysql> create table ORDERS
+    -> (Onum int(4),
+    -> Amt float(7,2),
+    -> Odate date,
+    -> Cnum int(4),
+    -> Snum int(4))
+
+4)mysql> insert into salespeople(SNUM,SNAME,CITY,COMM)
+    -> values('1001','Peel','London','.12'),
+    -> ('1004','Motika','London','.11'),
+    -> ('1002','Serres','San Jose','.13'),
+    -> ('1007','Rifkin','Barcelona','.15');
+
+5)mysql> insert into customers(CNUM,CNAME,CITY,RATING,SNUM)
+    -> values ('2001','Hoffman','London','100','1001'),
+    -> ('2002','Giovanni','Rome','200','1003'),
+    -> ('2003','Liu','San Jose','200','1002'),
+    -> ('2004','Grass','Berlin','300','1002'),
+    -> ('2005','Clemens','London','100','1001'),
+    -> ('2008','Cisneros','San Jose','300','1007');
+
+6)mysql> insert into orders(ONUM,AMT,ODATE,CNUM,SNUM)
+    -> values('3001','18.69','1990-10-03','2008','1007'),
+    -> ('3002','1900.10','1990-10-03','2007','1004'),
+    -> ('3003','767.19','1990-10-030','2001','1001'),
+    -> ('3007','75.75','1990-10-04','2004','1002');
+
+Assignment No.2
+1) Which field of the Customers table is the primary key?
+	Ans:- Cnum column having PRIMARY KEY in CUSTOMERS table. because it will use in ORDERS table as FOREGIN KRY.
+2) What is the 4th column of the Customers table?
+	Ans:- Rating 
+3) What is another word for row? For column?
+	Ans:- In DBMS another name for row is RECORD and in RDBMS is TUPLE,ENTITY,OPPORTUNITY.
+4) Why isn’t it possible to see the first five rows of a table?
+	Ans:	-   In DBMS data stored sequentially in file, where as in RDBMS table is not a file, every row is file.
+		-   Rows of table are scattered all over the DB server HD.
+		-   When you insert into table, wherever system finds the free space in the DB server HD it will stored row then.
+		-   The reason that RDBMS does this is to speed up the insert statement.
+		-   When you select table, the order of rows in the output depends on the row address.
+
+Assignment No.3
+1) Does ANSI recognize the data type DATE?
+Ans :- Yes.
+
+2) Which subdivision of SQL is used to put values in tables?
+Ans :- insert into values.
+
+Assignment No.4
+1)SELECT onum,
+       amt,
+       odate
+FROM orders;
+
+2)SELECT *
+FROM customers
+WHERE snum=1001;
+
+3)SELECT city,
+       sname,
+       snum,
+       comm.
+FROM salespeople;
+
+4)SELECT rating||' '||cname "employee rating"
+FROM customers
+WHERE city='sanjose';
+
+5)SELECT DISTINCT snum,
+                onum
+FROM salespeople
+ORDER BY snum;
+
+Assignment No.5
+1)SELECT *
+FROM orders
+WHERE amt>1000;
+
+2)SELECT sname,
+       city
+FROM salespeople
+WHERE city='London'
+  AND comm >.10;
+
+3)SELECT *
+FROM customers
+WHERE rating>100
+  OR city='rome';
+
+4)SELECT *
+FROM Orders
+WHERE (amt < 1000
+       OR NOT (odate = ‘03-OCT-1990’
+               AND cnum > 2003));
+
+5)SELECT *
+FROM Orders
+WHERE NOT ((odate = ‘03-OCT-1990’
+            OR snum>1006)
+           AND amt >= 1500);
+
+6)SELECT snum,
+       sname,
+       city,
+       comm
+FROM Salespeople
+WHERE (comm > .12
+       OR comm <.14);
